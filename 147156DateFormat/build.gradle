@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation libs.slf4j.api
+    implementation libs.unittest.helper
+
+    testImplementation libs.assertj.core
+    testImplementation libs.logback.classic
+    testImplementation libs.testng.alt
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.named('test') {
+    // Use TestNG for unit tests.
+    useTestNG()
+}
